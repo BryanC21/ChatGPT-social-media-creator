@@ -1,8 +1,8 @@
-const mongoose = require("mongoose");
+const mongoose = require('../database');
 
 const PostSchema = new mongoose.Schema(
 	{
-		user_id: Number,
+		user_id: mongoose.ObjectId,
 		text: String,
 		image: String,
 	}, 

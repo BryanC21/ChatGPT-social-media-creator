@@ -1,9 +1,9 @@
-const mongoose = require("mongoose");
+const mongoose = require('../database');
 
 const AccountSchema = new mongoose.Schema(
 	{
-		user_id: Number,
-		platform_id: Number,
+		user_id: mongoose.ObjectId,
+		platform_id: mongoose.ObjectId,
 		token: String,
 		secret: String,
 	}, 
