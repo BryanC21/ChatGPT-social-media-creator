@@ -1,11 +1,10 @@
-const mongoose = require('mongoose');
+const User = require('./models/User');
+const Platform = require('./models/Platform');
 
-const uri = "mongodb+srv://root:root@cluster0.mcppmqk.mongodb.net/main?retryWrites=true&w=majority";
+const user = new User({first_name: "Kevin", last_name: "James", email: "kj@kj.com", password: "123"})
+user.save().then(() => console.log("User Saved"));
+console.log(user);
 
-mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
-    .then((result) => console.log('connected to db'))
-    .catch((err) => console.log(err));
-
-// const user = new User({first_name: "Kevin", last_name: "James", email: "kj@kj.com", password: "123"})
-// user.save().then(() => console.log("User Saved"));
-// console.log(user);
+const platform = new Platform({name: "Twitter"})
+platform.save().then(() => console.log("Platform Saved"));
+console.log(platform);

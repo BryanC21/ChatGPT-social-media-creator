@@ -1,7 +1,8 @@
+require('dotenv').config();
 const mongoose = require("mongoose");
  
 // Set Up the Database connection
-mongoose.connect("mongodb+srv://root:root@cluster0.mcppmqk.mongodb.net/main", {
+mongoose.connect(process.env.MONGODB_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 });

@@ -1,6 +1,7 @@
 require('dotenv').config();
 const oauth = require('oauth');
 const session = require('express-session');
+const User = require('../database/models/User');
 const Account = require('../database/models/Account');
 const Platform = require('../database/models/Platform');
 
@@ -24,6 +25,7 @@ exports.authTwitter = (req, res) => {
 
 // Twitter Authentication Callback
 exports.authTwitterCallback = async (req, res) => {
+    var user_id = await User.findOne({first_name: "Kevin"}).then(result => result._id);
     var platform_id = await Platform.findOne({name: "Twitter"}).then(result => result._id);
     consumer.getOAuthAccessToken(req.query.oauth_token, req.session.secret, req.query.oauth_verifier, function(err, oauthAccessToken, oauthAccessTokenSecret, results) {
         if (err) {
@@ -34,7 +36,7 @@ exports.authTwitterCallback = async (req, res) => {
         } else {
             console.log("saving account");
             var account = new Account({
-                user_id: "6425f7dd00cf7d5f16badd4f",
+                user_id: user_id,
                 platform_id: platform_id,
                 token: oauthAccessToken,
                 secret: oauthAccessTokenSecret,

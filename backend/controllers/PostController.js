@@ -1,12 +1,14 @@
 require('dotenv').config();
 const { TwitterApi } = require('twitter-api-v2');
+const User = require('../database/models/User');
 const Account = require('../database/models/Account');
 const Platform = require('../database/models/Platform');
 
 // Post Twitter
 exports.postTwitter = async (req, res) => {
+    var user_id = await User.findOne({first_name: "Kevin"}).then(result => result._id);
     var platform_id = await Platform.findOne({name: "Twitter"}).then(result => result._id);
-    var account = await Account.findOne({user_id: "6425f7dd00cf7d5f16badd4f", platform_id: platform_id})
+    var account = await Account.findOne({user_id: user_id, platform_id: platform_id})
     .then(result => result);
 
     client = new TwitterApi({
