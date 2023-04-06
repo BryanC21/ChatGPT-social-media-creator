@@ -21,6 +21,7 @@
     "mysql": "^2.18.1",
     "mysql2": "^2.3.3",
     "oauth": "^0.10.0",
+    "openai": "^3.2.1",
     "passport": "^0.6.0",
     "passport-saml": "^3.2.4",
     "twitter-api-v2": "^1.14.2"

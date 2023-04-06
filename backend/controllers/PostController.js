@@ -19,8 +19,14 @@ exports.postTwitter = async (req, res) => {
     });
     let message = req.query.message;
     client.v2.tweet(message).then((val) => {
-        res.send({ 'code': 200, 'message': 'Tweet created successfully'} );
+        return res.status(200).send({
+            status: "success",
+            'message': 'Tweet created successfully'
+        })
     }).catch((err) => {
-        res.send({ 'code': 400, 'message': 'Invalid tweet text' });
+        return res.status(401).send({
+            status: "success",
+            'message': err
+        })
     });
 }

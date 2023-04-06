@@ -13,6 +13,7 @@ const adminRoute = require("./routes/AdminRoute");
 const searchRoute = require("./routes/SearchRoute");
 const authRoute = require("./routes/AuthRoute");
 const postRoute = require("./routes/postRoute");
+const aiRoute = require("./routes/aiRoute");
 
 // express app initialized
 const app = express();
@@ -42,6 +43,7 @@ app.use("/api/admin", adminRoute);
 app.use("/api/search", searchRoute);
 app.use("/api/auth", authRoute);
 app.use("/api/post", postRoute);
+app.use("/api/ai", aiRoute);
 
 // SSO
 app.get("/logout", (req, res) => {
