@@ -1,13 +1,12 @@
-version: 0.3
+version: 0.2
 
 phases:
   install:
     runtime-versions:
-      nodejs: 14
+      nodejs: 12
     commands:
       # Install dependencies needed for running tests
       - npm install
-
       # Upgrade AWS CLI to the latest version
       - pip3 install --upgrade awscli
   pre_build:
@@ -18,6 +17,11 @@ phases:
     commands:
       # Remove existing node_modules to clear dev dependencies
       - rm -r node_modules
+
+      # Change Node Versions
+      - yum remove -y nodejs
+      - curl -sL https://deb.nodesource.com/setup_16.x | bash -
+      - yum install -y nodejs
 
       # Install runtime dependencies
       - npm install --production
