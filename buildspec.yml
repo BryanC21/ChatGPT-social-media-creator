@@ -24,6 +24,7 @@ phases:
       - yum install -y nodejs
 
       # Install runtime dependencies
+      - npm uninstall -g pm2
       - npm install --production
       - cd backend && npm install --production
       - cd ../frontend && npm install --production
