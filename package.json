@@ -5,11 +5,15 @@
   "private": true,
   "devDependencies": {
     "mocha": "5.0.0",
-    "unit.js": "2.0.0",
-    "supertest": "3.0.0"
+    "supertest": "3.0.0",
+    "unit.js": "2.0.0"
   },
   "scripts": {
     "start": "node app.js",
     "test": "mocha --recursive tests --exit"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "http-proxy": "^1.18.1"
   }
 }
