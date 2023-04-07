@@ -48,12 +48,12 @@ async function runner() {
     //fs.appendFileSync(envFilePath, `TWITTER_CLIENT_SECRET=${myVar3}\n`);
     process.env.TWITTER_CLIENT_SECRET = myVar3;
 
-    /*
+    
     console.log("__________")
     console.log(process.env.MONGODB_URI);
     console.log(myVar2);
     console.log(myVar3);
-    */
+    
 }
 
 runner().then(() => {
