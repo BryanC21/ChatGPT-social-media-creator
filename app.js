@@ -6,11 +6,19 @@ var app = express(),
     publicDir = path.join(__dirname, 'public');
 const proxy = httpProxy.createProxyServer();
 
-const { spawn, fork } = require('child_process');
-
+const { exec } = require('child_process');
 // spawn child processes
-const back = fork('./backend/index.js');
-const front = fork('./frontend/index.js');
+exec("pm2 start process.config.js", (error, stdout, stderr) => {
+    if (error) {
+        console.log(`error: ${error.message}`);
+        return;
+    }
+    if (stderr) {
+        console.log(`stderr: ${stderr}`);
+        return;
+    }
+    console.log(`stdout: ${stdout}`);
+});
 
 //app.use(express.static(publicDir))
 // Routes
