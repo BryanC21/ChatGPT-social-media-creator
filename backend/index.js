@@ -30,12 +30,13 @@ async function getParameter(parameterName) {
     return response.Parameter.Value;
 }
 async function runner() {
-    // Write the environment variable to a new .env file
-    //const envFilePath = path.join(__dirname, '.env');
-    // Clear the file if it already exists
-    //fs.writeFileSync(envFilePath, '');
-    // Hard write the environment variable to a new .env file
-    const myVar = await getParameter('MONGODB_URI');
+    
+    // THIS GRABS THE ENVIRONMENT VARIABLES FROM AWS PARAMETER STORE
+    // commented out because it would cause problems with the local environment
+    // since we dont all have access keys to the same AWS account
+    // so keep using your env file for local development
+
+    /*const myVar = await getParameter('MONGODB_URI');
 
     //fs.appendFileSync(envFilePath, `MONGODB_URI=${myVar}\n`);
     process.env.MONGODB_URI = myVar;
@@ -52,7 +53,7 @@ async function runner() {
     console.log("__________")
     console.log(process.env.MONGODB_URI);
     console.log(myVar2);
-    console.log(myVar3);
+    console.log(myVar3);*/
     
 }
 
