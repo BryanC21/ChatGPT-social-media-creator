@@ -7,12 +7,27 @@ var app = express(),
 const proxy = httpProxy.createProxyServer();
 
 
-const { exec } = require('child_process');
+const { fork } = require('child_process');
+
+const a = fork('backend/index.js');
+
+a.on('error', (code) => {
+    console.log(`child process exited with code ${code}`);
+    fork('backend/index.js');
+});
+
+const b = fork('frontend/index.js');
+
+b.on('error', (code) => {
+    console.log(`child process exited with code ${code}`);
+    fork('frontend/index.js');
+});
 
 //fork('backend/index.js');
 //fork('frontend/index.js');
 
 // spawn child processes
+/*
 exec("forever start ./frontend/index.js", (error, stdout, stderr) => {
     if (error) {
         console.log(`error: ${error.message}`);
@@ -23,7 +38,7 @@ exec("forever start ./frontend/index.js", (error, stdout, stderr) => {
         return;
     }
     console.log(`stdout: ${stdout}`);
-});
+});*/
 
 //app.use(express.static(publicDir))
 // Routes
