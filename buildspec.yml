@@ -20,7 +20,7 @@ phases:
 
       # Change Node Versions
       - yum remove -y nodejs
-      - curl -sL https://deb.nodesource.com/setup_16.x | bash -
+      - curl -sL https://rpm.nodesource.com/setup_16.x | bash -
       - yum install -y nodejs
 
       # Install runtime dependencies
