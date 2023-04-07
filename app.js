@@ -8,8 +8,12 @@ const proxy = httpProxy.createProxyServer();
 
 
 const { exec } = require('child_process');
+
+//fork('backend/index.js');
+//fork('frontend/index.js');
+
 // spawn child processes
-exec("npx pm2 start process.config.js", (error, stdout, stderr) => {
+exec("forever start ./frontend/index.js", (error, stdout, stderr) => {
     if (error) {
         console.log(`error: ${error.message}`);
         return;
