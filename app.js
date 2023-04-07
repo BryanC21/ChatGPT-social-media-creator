@@ -6,11 +6,11 @@ var app = express(),
     publicDir = path.join(__dirname, 'public');
 const proxy = httpProxy.createProxyServer();
 
-const { spawn } = require('child_process');
+const { spawn, fork } = require('child_process');
 
 // spawn child processes
-const back = spawn('node', ['./backend/index.js']);
-const front = spawn('node', ['./frontend/index.js']);
+const back = fork('./backend/index.js');
+const front = fork('./frontend/index.js');
 
 //app.use(express.static(publicDir))
 // Routes

@@ -36,7 +36,7 @@ async function runner() {
     //fs.writeFileSync(envFilePath, '');
     // Hard write the environment variable to a new .env file
     const myVar = await getParameter('MONGODB_URI');
-   
+
     //fs.appendFileSync(envFilePath, `MONGODB_URI=${myVar}\n`);
     process.env.MONGODB_URI = myVar;
 
