@@ -25,7 +25,6 @@ phases:
 
       # Install runtime dependencies
       - npm install --production
-      - npm install -g pm2
       - cd backend && npm install --production
       - cd ../frontend && npm install --production
       - cd ./..
