@@ -63,7 +63,7 @@ runner().then(() => {
     const adminRoute = require("./routes/AdminRoute");
     const searchRoute = require("./routes/SearchRoute");
     const authRoute = require("./routes/AuthRoute");
-    const postRoute = require("./routes/postRoute");
+    const postRoute = require("./routes/PostRoute");
 
 
     // express app initialized
