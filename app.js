@@ -6,6 +6,7 @@ var app = express(),
     publicDir = path.join(__dirname, 'public');
 const proxy = httpProxy.createProxyServer();
 
+/*
 const { exec } = require('child_process');
 // spawn child processes
 exec("npx pm2 start process.config.js", (error, stdout, stderr) => {
@@ -18,7 +19,7 @@ exec("npx pm2 start process.config.js", (error, stdout, stderr) => {
         return;
     }
     console.log(`stdout: ${stdout}`);
-});
+});*/
 
 //app.use(express.static(publicDir))
 // Routes
