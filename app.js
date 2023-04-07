@@ -8,7 +8,7 @@ const proxy = httpProxy.createProxyServer();
 
 const { exec } = require('child_process');
 // spawn child processes
-exec("pm2 start process.config.js", (error, stdout, stderr) => {
+exec("npx pm2 start process.config.js", (error, stdout, stderr) => {
     if (error) {
         console.log(`error: ${error.message}`);
         return;
