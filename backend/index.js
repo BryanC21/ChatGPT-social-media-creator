@@ -65,6 +65,8 @@ runner().then(() => {
     const searchRoute = require("./routes/SearchRoute");
     const authRoute = require("./routes/AuthRoute");
     const postRoute = require("./routes/PostRoute");
+    
+    const whisper = require("./AI/whisper");
 
 
     // express app initialized
@@ -101,6 +103,7 @@ runner().then(() => {
     app.use("/api/search", searchRoute);
     app.use("/api/auth", authRoute);
     app.use("/api/post", postRoute);
+    app.use("/api/ai", whisper);
 
     // SSO
     app.get("/logout", (req, res) => {
