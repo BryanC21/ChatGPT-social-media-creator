@@ -3,11 +3,12 @@ const { TwitterApi } = require('twitter-api-v2');
 const User = require('../database/models/User');
 const Account = require('../database/models/Account');
 const Platform = require('../database/models/Platform');
+const Post = require('../database/models/Post');
 
 // Post Twitter
 exports.postTwitter = async (req, res) => {
-    // var user_id = await User.findOne({first_name: "Kevin"}).then(result => result._id);
-    var user_id = req.query.user_id;
+    let message = req.query.message;
+    var user_id = req.query.user.attributes.email;
     var platform_id = await Platform.findOne({name: "Twitter"}).then(result => result._id);
     var account = await Account.findOne({user_id: user_id, platform_id: platform_id})
     .then(result => result);
@@ -18,8 +19,12 @@ exports.postTwitter = async (req, res) => {
         accessToken: account.token,
         accessSecret: account.secret,
     });
-    let message = req.query.message;
     client.v2.tweet(message).then((val) => {
+        let post = new Post({
+            user_id: user_id,
+            text: message,
+            image: "",
+        })
         return res.status(200).send({
             status: "success",
             'message': 'Tweet created successfully'
