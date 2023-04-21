@@ -11,6 +11,11 @@ const app = express.Router();
 const upload = multer();
 
 app.post('/useWhisper', upload.single('file'), (req, res) => {
+
+    if(!req.file) {
+        console.log('No file received');
+        return res.status(500).send('No file received');
+    }
     const file = req.file;
     console.log('File:', file.originalname);
 
@@ -35,7 +40,7 @@ app.post('/useWhisper', upload.single('file'), (req, res) => {
             console.log('Response:', response.data);
             //Use gpt to generate content based on this text
             //Send back the generated text
-            res.sendStatus(response.status);
+            res.status(response.status).send(response.data);
         })
         .catch((error) => {
             console.error('Error:', error);
