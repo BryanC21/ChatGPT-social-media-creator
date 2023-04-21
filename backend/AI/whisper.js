@@ -12,7 +12,7 @@ const upload = multer();
 
 app.post('/useWhisper', upload.single('file'), (req, res) => {
     const file = req.file;
-    console.log('File:', file);
+    console.log('File:', file.originalname);
 
     // create a FormData object and append the file data to it
     const formData = new FormData();
@@ -32,7 +32,9 @@ app.post('/useWhisper', upload.single('file'), (req, res) => {
 
     axios(options)
         .then((response) => {
-            console.log('Response:', response);
+            console.log('Response:', response.data);
+            //Use gpt to generate content based on this text
+            //Send back the generated text
             res.sendStatus(response.status);
         })
         .catch((error) => {
