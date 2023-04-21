@@ -1,0 +1,28 @@
+{
+  "name": "chatgpt-social-media-post-creator",
+  "version": "1.0.0",
+  "description": "Generate social media posts summarizing articles and videos by using ChatGPT and Dall-e.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BryanC21/ChatGPT-social-media-post-creator.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BryanC21/ChatGPT-social-media-post-creator/issues"
+  },
+  "homepage": "https://github.com/BryanC21/ChatGPT-social-media-post-creator#readme",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "config": "^3.3.9",
+    "express": "^4.18.2",
+    "mongoose": "^7.0.4"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22"
+  }
+}
