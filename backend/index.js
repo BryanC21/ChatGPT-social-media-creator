@@ -67,6 +67,7 @@ runner().then(() => {
     const postRoute = require("./routes/PostRoute");
     
     const whisper = require("./AI/whisper");
+    const aiRoute = require("./routes/AiRoute");
 
 
     // express app initialized
@@ -94,6 +95,7 @@ runner().then(() => {
     //Up here so at least i have one route I can trust
     app.get('/api', (req, res) => {
         console.log("api happy");
+        console.log(req.user);
         return res.send("api happy");
     });
 
@@ -103,7 +105,10 @@ runner().then(() => {
     app.use("/api/search", searchRoute);
     app.use("/api/auth", authRoute);
     app.use("/api/post", postRoute);
-    app.use("/api/ai", whisper);
+
+    app.use("/api/aiv2", whisper);
+    app.use("/api/ai", aiRoute);
+
 
     // SSO
     app.get("/logout", (req, res) => {
@@ -115,13 +120,12 @@ runner().then(() => {
 
     app.get("/login", passport.authenticate('saml', () => {
         console.log("login");
-        return res.redirect("http://54.183.160.128:3000/sso");
-
+        return res.redirect("http://localhost:3000/sso");
     }));
 
     app.get("/safety", (req, res) => {
         console.log("safety");
-        return res.redirect("http://54.183.160.128:3000/employees?mode=default");
+        return res.redirect("http://localhost:3000/employees?mode=default");
     });
     app.post("/login/callback", passport.authenticate('saml', config.saml.options));
 
@@ -132,7 +136,6 @@ runner().then(() => {
             return res.status(400).send({ data: "not authenticated" });
         } else {
             console.log("authenticated");
-            console.log(req.user);
             res.status(200).send({ user: req.user });
         }
     });
@@ -145,8 +148,9 @@ runner().then(() => {
 
     // default route
     app.get('/api', (req, res) => {
-        console.log('GET Received')
-        res.send('DEFAULT ROUTE!')
+        console.log('GET Received');
+        console.log(req.user);
+        res.send('DEFAULT ROUTE!');
     });
 
     console.log("done");
