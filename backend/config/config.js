@@ -3,8 +3,8 @@ const path = require('path');
 const config = {
     saml : {
         cert: path.join(__dirname, 'saml.pem'),
-        entryPoint: "https://trial-1322739.okta.com/app/trial-1322739_sso272final_1/exk3gbf6g5J92dTMu697/sso/saml",
-        issuer: "http://54.183.160.128:5002",
+        entryPoint: "https://dev-24842710.okta.com/app/dev-24842710_chatgptsocialmedia_1/exk96e0w1xoaQBez35d7/sso/saml",
+        issuer: "http://www.okta.com/exk96e0w1xoaQBez35d7",
         options: {
             failureRedirect: "/login",
             successRedirect: "/safety",
@@ -12,7 +12,7 @@ const config = {
         }
     },
     server : {
-        port: 5002
+        port: 5003
     },
     session: {
         resave: false,
