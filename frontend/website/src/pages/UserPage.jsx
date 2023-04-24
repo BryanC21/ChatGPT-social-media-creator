@@ -4,14 +4,14 @@ import axios from "axios";
 import dayjs from "dayjs";
 import * as React from 'react';
 import { useNavigate, useParams } from "react-router-dom";
-//import Footer from "../components/Footer";
-//import Header from '../components/Header';
+import Footer from "../components/Footer";
+import Header from '../components/Header';
 import { getToken } from '../util';
 import CheckIcon from '@mui/icons-material/CheckCircleTwoTone';
 import CancelTwoToneIcon from '@mui/icons-material/CancelTwoTone';
 import Post from "../../../../backend/database/models/Post";
-import User from "../../../../backend/database/models/User";
 import Platform from "../../../../backend/database/models/Platform";
+import User from "../../../../backend/database/models/User";
 
 const Image = styled('img')({
     height: '100%',
@@ -53,13 +53,13 @@ const UserPage = () => {
                             <Image src={'../../male-user.png'} />
                         </Grid>
                         <Grid item xs={6}>
-                        <Typography variant="subtitle2" color='info.main'>
+                            <Typography variant="subtitle2" color='info.main'>
                                 {Platform.name}
                             </Typography>
                         </Grid>
                         <Grid item xs={6} justifyContent="flex-start" alignItems="flex-start" textAlign='left'>
-                            <Typography variant="h6" color='info.main' borderBottom={2}>
-                                {User.firstName} {User.lastName}
+                            <Typography variant="h5" color='info.main' borderBottom={2}>
+                                {User.first_name} {User.last_name}
                             </Typography>
                             <Typography variant="subtitle2" color='info.main'>
                                 {User.email}

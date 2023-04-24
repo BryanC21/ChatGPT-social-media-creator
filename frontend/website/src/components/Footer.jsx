@@ -18,7 +18,7 @@ const Footer = () => {
         >
             <Container maxWidth="sm">
                 <Typography variant="body1">
-                    Generate the Picture.
+                    Generate the Tweet.
                 </Typography>
                 <Copyright />
             </Container>
