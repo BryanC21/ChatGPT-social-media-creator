@@ -46,7 +46,11 @@ app.use((req, res) => {
     if (req.path.startsWith('/api')) {
         // forward requests starting with '/api' to port 3005
         proxy.web(req, res, { target: 'http://localhost:5003' });
-    } else {
+    } 
+    else if (req.path.startsWith('/test-proxy')){
+        return res.send('test-proxy success');
+    }
+    else {
         // forward all other requests to port 5005
         proxy.web(req, res, { target: 'http://localhost:3006' });
     }
