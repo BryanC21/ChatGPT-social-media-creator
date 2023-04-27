@@ -25,6 +25,7 @@ exports.postTwitter = async (req, res) => {
             text: message,
             image: "",
         })
+        post.save().then(() => console.log("Platform Saved"));
         return res.status(200).send({
             status: "success",
             'message': 'Tweet created successfully'
@@ -35,4 +36,14 @@ exports.postTwitter = async (req, res) => {
             'message': err
         })
     });
+}
+
+exports.getPostHistory = async (req, res) => {
+    var user_id = req.query.user.attributes.email;
+    var posts = await Post.find({user_id: user_id});
+
+    return res.status(200).send({
+        status: "success",
+        results: posts
+    })
 }
