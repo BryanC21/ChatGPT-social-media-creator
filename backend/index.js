@@ -30,42 +30,39 @@ async function getParameter(parameterName) {
     return response.Parameter.Value;
 }
 async function runner() {
-    
-    // THIS GRABS THE ENVIRONMENT VARIABLES FROM AWS PARAMETER STORE
-    // commented out because it would cause problems with the local environment
-    // since we dont all have access keys to the same AWS account
-    // so keep using your env file for local development
 
-    /*const myVar = await getParameter('MONGODB_URI');
 
-    //fs.appendFileSync(envFilePath, `MONGODB_URI=${myVar}\n`);
-    process.env.MONGODB_URI = myVar;
+        // THIS GRABS THE ENVIRONMENT VARIABLES FROM AWS PARAMETER STORE
+        // Comment out because it would cause problems with the local environment
+        // keep using your env file for local development
 
-    const myVar2 = await getParameter('TWITTER_CLIENT_ID');
-    //fs.appendFileSync(envFilePath, `TWITTER_CLIENT_ID=${myVar2}\n`);
-    process.env.TWITTER_CLIENT_ID = myVar2;
+        const myVar = await getParameter('MONGODB_URI');
+        process.env.MONGODB_URI = myVar;
 
-    const myVar3 = await getParameter('TWITTER_CLIENT_SECRET');
-    //fs.appendFileSync(envFilePath, `TWITTER_CLIENT_SECRET=${myVar3}\n`);
-    process.env.TWITTER_CLIENT_SECRET = myVar3;
+        const myVar2 = await getParameter('TWITTER_CLIENT_ID');
+        process.env.TWITTER_CLIENT_ID = myVar2;
 
-    
-    console.log("__________")
-    console.log(process.env.MONGODB_URI);
-    console.log(myVar2);
-    console.log(myVar3);*/
-    
+        const myVar3 = await getParameter('TWITTER_CLIENT_SECRET');
+        process.env.TWITTER_CLIENT_SECRET = myVar3;
+
+        const myVar4 = await getParameter('OPENAI_API_KEY');
+        process.env.OPENAI_API_KEY = myVar4;
+
+
+        console.log("__________")
+        console.log(process.env.MONGODB_URI);
+        console.log(process.env.TWITTER_CLIENT_ID);
+        console.log(process.env.TWITTER_CLIENT_SECRET);
+        console.log(process.env.OPENAI_API_KEY);
+
 }
 
 runner().then(() => {
 
     // import routes
-    const userRoute = require("./routes/UserRoute");
-    const adminRoute = require("./routes/AdminRoute");
-    const searchRoute = require("./routes/SearchRoute");
     const authRoute = require("./routes/AuthRoute");
     const postRoute = require("./routes/PostRoute");
-    
+
     const whisper = require("./AI/whisper");
     const aiRoute = require("./routes/AiRoute");
 
@@ -100,9 +97,6 @@ runner().then(() => {
     });
 
     // routes
-    app.use("/api/user", userRoute);
-    app.use("/api/admin", adminRoute);
-    app.use("/api/search", searchRoute);
     app.use("/api/auth", authRoute);
     app.use("/api/post", postRoute);
 
