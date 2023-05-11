@@ -78,8 +78,6 @@ runner().then(() => {
     app.use((req, res, next) => {
         console.log("middleware");
         console.log(req.originalUrl);
-        //console.log(req);
-        //console.log(res);
         res.header("Access-Control-Allow-Origin", req.header('origin'));
         res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
         res.header("Access-Control-Allow-Credentials", "true");
@@ -104,6 +102,7 @@ runner().then(() => {
     app.get("/logout", (req, res) => {
         console.log("logout");
         req.logout(() => {
+            req.user = null;
             res.send("logged out");
         });
     });
@@ -118,6 +117,18 @@ runner().then(() => {
         return res.redirect("http://localhost:3000/employees?mode=default");
     });
     app.post("/login/callback", passport.authenticate('saml', config.saml.options));
+
+    app.get("/checkLogin", (req, res) => {
+        if (req.user) {
+            return res.status(200).send({
+                status: "success"
+            })
+        } else {
+            return res.status(401).send({
+                status: "fail"
+            })
+        }
+    });
 
     app.get("/useridentity", (req, res, next) => {
         console.log("useridentity");
