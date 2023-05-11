@@ -1,8 +1,16 @@
 import Container from 'react-bootstrap/Container';
 import { Nav, Navbar } from 'react-bootstrap';
 import { Link } from "react-router-dom";
+import { useEffect, useState } from 'react';
 
 function MyNavbar() {
+
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    // some check somehow
+  }, [isLoggedIn]);
+
   return (
     <Navbar collapseOnSelect expand="lg" bg="light" variant="light" className="mb-5">
       <Container>
@@ -24,12 +32,21 @@ function MyNavbar() {
               </NavDropdown.Item>
             </NavDropdown> */}
           </Nav>
-          <Nav>
-            <Nav.Link href="#"><Link to="/login"> Log In </Link></Nav.Link>
-            <Nav.Link eventKey={2} href="#">
-              <Link to="/signup"> Sign In </Link>
-            </Nav.Link>
-          </Nav>
+          {!isLoggedIn ?
+            <Nav>
+              <Nav.Link>
+                <Link to="/login"> Log In </Link>
+              </Nav.Link>
+              <Nav.Link>
+                <Link to="/signup"> Sign In </Link>
+              </Nav.Link>
+            </Nav>
+            :
+            <Nav>
+              <Nav.Link>
+                <Link to="/logout"> Log Out </Link>
+              </Nav.Link>
+            </Nav>}
         </Navbar.Collapse>
       </Container>
     </Navbar>
