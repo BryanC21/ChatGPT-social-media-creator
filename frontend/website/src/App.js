@@ -8,6 +8,7 @@ import MyNavbar from "./components/MyNavbar";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 import Logout from "./pages/Logout";
+import UserPage from "./pages/UserPage";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/logout" element={<Logout />} />
+        <Route path="/user" element={<UserPage} />
         <Route element={<Error />} />
       </Routes>
     </div>
