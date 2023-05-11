@@ -82,7 +82,6 @@ runner().then(() => {
     app.use(express.json());
     //app.use(cors());
     app.use((req, res, next) => {
-        console.log("middleware");
         console.log(req.originalUrl);
         res.header("Access-Control-Allow-Origin", req.header('origin'));
         res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
@@ -94,7 +93,6 @@ runner().then(() => {
     //Up here so at least i have one route I can trust
     app.get('/api', (req, res) => {
         console.log("api happy");
-        console.log(req.user);
         return res.send("api happy");
     });
 
@@ -110,7 +108,7 @@ runner().then(() => {
 
 
     // SSO
-    app.get("/logout", (req, res) => {
+    app.get("/api/logout", (req, res) => {
         console.log("logout");
         req.logout(() => {
             req.user = null;
@@ -118,7 +116,7 @@ runner().then(() => {
         });
     });
 
-    app.get("/login", passport.authenticate('saml', () => {
+    app.get("/api/login", passport.authenticate('saml', () => {
         console.log("login");
         if (checkTwitterHelper(req.user.attributes.email)) {
             return res.redirect("http://localhost:3000");
@@ -127,13 +125,9 @@ runner().then(() => {
         }
     }));
 
-    app.get("/safety", (req, res) => {
-        console.log("safety");
-        return res.redirect("http://localhost:3000");
-    });
-    app.post("/login/callback", passport.authenticate('saml', config.saml.options));
+    app.post("/api/login/callback", passport.authenticate('saml', config.saml.options));
 
-    app.get("/checkLogin", (req, res) => {
+    app.get("/api/checkLogin", (req, res) => {
         if (req.user) {
             return res.status(200).send({
                 status: "success"
@@ -145,31 +139,12 @@ runner().then(() => {
         }
     });
 
-    app.get("/useridentity", (req, res, next) => {
-        console.log("useridentity");
-        if (!req.isAuthenticated()) {
-            console.log("not authenticated");
-            return res.status(400).send({ data: "not authenticated" });
-        } else {
-            console.log("authenticated");
-            res.status(200).send({ user: req.user });
-        }
-    });
-
-    app.get("/api/sad", (req, res) => {
-        //console.log(req.flash('error'));
-        console.log("sad");
-        res.status(200).send({ data: "sad" });
-    });
-
     // default route
     app.get('/api', (req, res) => {
         console.log('GET Received');
-        console.log(req.user);
         res.send('DEFAULT ROUTE!');
     });
 
-    console.log("done");
     // listen for requests
     const port = process.env.PORT || 5003;
     app.listen(port, () => {
