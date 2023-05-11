@@ -67,11 +67,21 @@ export default function Home() {
       });
   }
 
-  const postTweet = async (tweetContent) => {
+  const postTweet = async (tweetContent, imgURL) => {
     // Call backend to post to twitter
-    alert("Tweet posted! (Lie)");
+    //alert("Tweet posted! (Lie)");
     //alert(tweetContent);
 
+    axios.get("http://ec2-52-8-240-214.us-west-1.compute.amazonaws.com/api/post/twitter", { withCredentials: true }, { params: { message: tweetContent, img: imgURL } } )
+      .then(res => {
+        console.log(res);
+        alert("Tweet posted!");
+      })
+      .catch(err => {
+        console.log(err);
+        alert("Tweet failed to post!");
+      }
+      );
 
 
   }
