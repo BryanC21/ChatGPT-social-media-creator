@@ -19,7 +19,7 @@ passport.deserializeUser((user, done) => {
 passport.use(new SAMLStrategy({
     issuer: config.saml.issuer,
     protocol: 'http://',
-    path: '/login/callback',
+    path: '/api/login/callback',
     entryPoint: config.saml.entryPoint,
     cert: fs.readFileSync(config.saml.cert, 'utf-8'),
 } , (user, done) => {
