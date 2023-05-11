@@ -74,7 +74,7 @@ function HomeInput(props) {
 
   return (
     <div>
-      <div className="card" style={{ width: '35rem' }}>
+      <div className="card">
         <div className="card-body">
           <div className="text-center">
             <h5 className="card-title">Generate Summary</h5>
