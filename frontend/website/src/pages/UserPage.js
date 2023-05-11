@@ -52,15 +52,15 @@ const UserPage = () => {
                         </Grid>
                         <Grid item xs={6}>
                             <Typography variant="subtitle2" color='#00008B'>
-                                {Platform.name}
+                                Twitter
                             </Typography>
                         </Grid>
                         <Grid item xs={6} justifyContent="flex-start" alignItems="flex-start" textAlign='left'>
                             <Typography variant="h5" color='#191970' borderBottom={2}>
-                                {User.first_name} {User.last_name}
+                                {user.first_name} {user.last_name}
                             </Typography>
                             <Typography variant="subtitle2" color='#00008B'>
-                                {User.email}
+                                {user.email}
                             </Typography>
                             <Typography variant="subtitle2" >
                                 Images Created: {Post.image}
