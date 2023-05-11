@@ -1,8 +1,9 @@
 const express = require("express");
 const router = express.Router();
+const verify = require("../config/verify");
 const {postTwitter, getPostHistory} = require("../controllers/PostController");
 
-router.get("/twitter", postTwitter);
-router.get("/getPostHistory", getPostHistory);
+router.get("/twitter", verify, postTwitter);
+router.get("/getPostHistory", verify, getPostHistory);
 
 module.exports = router;
