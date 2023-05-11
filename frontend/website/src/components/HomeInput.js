@@ -106,23 +106,25 @@ function HomeInput(props) {
                 <Form.Control as="textarea" rows={3} value={tweetText} onChange={handleTweetText} />
               </Form.Group>
 
+              <br />
               <label>DISCLAIMER: OpenAI can refuse to generate images for any reason including using a person's likeness or copyright</label>
+              <br></br>
+              <br></br>
               <Button variant="primary" onClick={handleImages}>Make Image for tweet</Button>
               <br></br>
               { !invisToggle ?
               <div>
-              <label>
+              {/*<label>
                 <input type="checkbox"
                   checked={isChecked}
                   onChange={handleCheckboxChange}/>
                 <span> Include Image for tweet</span>
-              </label>
-              <br></br>
+              </label>*/}
               <img src={imgURL} width='512' height='512'/>
               </div>
               : null}
               <br></br>
-              <Button variant="primary" onClick={handlePostTweet}>Post Tweet</Button>
+              {/*<Button variant="primary" onClick={handlePostTweet}>Post Tweet</Button>*/}
             </Form>
             : <div className="text-center">
               <h1>Loading...</h1>
