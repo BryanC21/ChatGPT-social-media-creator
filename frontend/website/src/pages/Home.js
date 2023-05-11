@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import HomeInput from "../components/HomeInput";
 import Summary from "../components/Summary";
 import axios from "axios";
@@ -11,6 +11,25 @@ export default function Home() {
   const [summary, setSummary] = useState("");
 
   const [isLoading, setIsLoading] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    // some check somehow
+    axios.get("http://localhost:5003/checkLogin", { withCredentials: true })
+      .then((response) => {
+        if (response.status === 200) {
+          console.log("logged in");
+          setIsLoggedIn(true);
+        } else {
+          console.log("not logged in");
+          setIsLoggedIn(false);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      }
+      );
+  }, [isLoggedIn]);
 
   const handleTextInputChange = (event) => {
     setTextInput(event.target.value);
@@ -51,7 +70,10 @@ export default function Home() {
   const postTweet = async (tweetContent) => {
     // Call backend to post to twitter
     alert("Tweet posted! (Lie)");
-    alert(tweetContent);
+    //alert(tweetContent);
+
+
+
   }
 
   const handleTweetText = (event) => {
@@ -59,21 +81,25 @@ export default function Home() {
   }
 
 
-
-
   return <div>
     <div className="container">
       <div>
-        <div className=" justify-content-around">
-          <HomeInput textInput={textInput} audioInput={audioInput} videoInput={videoInput} tweetText={summary} isLoading={isLoading} setIsLoading={setIsLoading}
-            handleAudioInputChange={handleAudioInputChange}
-            handleTextInputChange={handleTextInputChange}
-            handleVideoInputChange={handleVideoInputChange}
-            generateSummary={generateSummary}
-            handleTweetText={handleTweetText}
-            postTweet={postTweet} />
-          <br />
-        </div>
+        {isLoggedIn ?
+          <div className=" justify-content-around">
+            <HomeInput textInput={textInput} audioInput={audioInput} videoInput={videoInput} tweetText={summary} isLoading={isLoading} setIsLoading={setIsLoading}
+              handleAudioInputChange={handleAudioInputChange}
+              handleTextInputChange={handleTextInputChange}
+              handleVideoInputChange={handleVideoInputChange}
+              generateSummary={generateSummary}
+              handleTweetText={handleTweetText}
+              postTweet={postTweet} />
+            <br />
+          </div>
+          :
+          <div className=" justify-content-around">
+            <h1 className="text-center">Please log in to use this application</h1>
+          </div>
+        }
       </div>
 
 

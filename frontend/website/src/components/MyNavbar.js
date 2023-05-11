@@ -10,7 +10,7 @@ function MyNavbar() {
 
   useEffect(() => {
     // some check somehow
-    axios.get("http://localhost:5003/checkLogin",  { withCredentials: true })
+    axios.get("http://localhost:5003/checkLogin", { withCredentials: true })
       .then((response) => {
         if (response.status === 200) {
           console.log("logged in");
@@ -30,12 +30,16 @@ function MyNavbar() {
   return (
     <Navbar collapseOnSelect expand="lg" bg="light" variant="light" className="mb-5">
       <Container>
-        <Navbar.Brand><Link to="/"> My Application</Link></Navbar.Brand>
+        <Navbar.Brand><Link to="/">AI Tweet Creator</Link></Navbar.Brand>
         {!isLoggedIn ?
-          <Nav className='me-auto'>
-            <Link to="/login"> Log In </Link>
-            <Link to="/signup"> Sign In </Link>
-          </Nav>
+          <div>
+            <Nav className='me-auto'>
+              <Link to="/login"> Log In </Link>
+            </Nav>
+            <Nav className='me-auto'>
+              <Link to="/signup"> Sign In </Link>
+            </Nav>
+          </div>
           :
           <Nav className='me-auto'>
             <Link to="/logout"> Log Out </Link>
