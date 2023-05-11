@@ -18,7 +18,7 @@ function HomeInput(props) {
       let dat = new FormData();
       dat.append('file', mediaFile);
 
-      axios.post('http://localhost:5003/api/aiv2/useWhisper', dat)
+      axios.post('http://ec2-52-8-240-214.us-west-1.compute.amazonaws.com/api/aiv2/useWhisper', dat)
         .then((response) => {
           console.log(response);
           generateSummary(response.data.text);
@@ -58,7 +58,7 @@ function HomeInput(props) {
   const handleImages = async () => {
     setInvisToggle(false);
     setIsLoading(true);
-    axios.get("http://localhost:5003/api/aiv2/useDall-e", { params: { prompt: "A thumbnail for this: " + tweetText.substring(0, 140), count: 1 } })
+    axios.get("http://ec2-52-8-240-214.us-west-1.compute.amazonaws.com/api/aiv2/useDall-e", { params: { prompt: "A thumbnail for this: " + tweetText.substring(0, 140), count: 1 } })
       .then(res => {
         setIsLoading(false);
         console.log(res.data.data[0].url);

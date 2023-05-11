@@ -8,7 +8,7 @@ export default function Logout() {
 
     useEffect(() => {
       // some check somehow
-      window.location.replace("http://localhost:5003/logout");
+      window.location.replace("http://ec2-52-8-240-214.us-west-1.compute.amazonaws.com/api/logout");
 
     }, []);
 

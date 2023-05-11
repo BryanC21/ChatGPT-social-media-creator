@@ -15,7 +15,7 @@ export default function Home() {
 
   useEffect(() => {
     // some check somehow
-    axios.get("http://localhost:5003/checkLogin", { withCredentials: true })
+    axios.get("http://ec2-52-8-240-214.us-west-1.compute.amazonaws.com/api/checkLogin", { withCredentials: true })
       .then((response) => {
         if (response.status === 200) {
           console.log("logged in");
@@ -47,10 +47,10 @@ export default function Home() {
     //setIsLoading(true);
     let response = text;
     // Call backend and generate tweet here
-    axios.get("http://localhost:5003/api/ai/summarize", { params: { text: text } })
+    axios.get("http://ec2-52-8-240-214.us-west-1.compute.amazonaws.com//api/ai/summarize", { params: { text: text } })
       .then(res => {
         response = res.data.results;
-        axios.get("http://localhost:5003/api/ai/createTweet", { params: { text: response } })
+        axios.get("http://ec2-52-8-240-214.us-west-1.compute.amazonaws.com/api/ai/createTweet", { params: { text: response } })
           .then(res => {
             setIsLoading(false);
             setSummary(res.data.results);

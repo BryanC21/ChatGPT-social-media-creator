@@ -10,7 +10,7 @@ function MyNavbar() {
 
   useEffect(() => {
     // some check somehow
-    axios.get("http://localhost:5003/checkLogin", { withCredentials: true })
+    axios.get("http://ec2-52-8-240-214.us-west-1.compute.amazonaws.com/api/checkLogin", { withCredentials: true })
       .then((response) => {
         if (response.status === 200) {
           console.log("logged in");

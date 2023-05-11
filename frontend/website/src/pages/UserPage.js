@@ -7,14 +7,14 @@ const UserPage = () => {
     const [post, setPost] = React.useState({});
 
     React.useEffect(() => {
-        axios.get(`http://localhost:5003/api/user/getCurrentUser`, { withCredentials: true })
+        axios.get(`http://ec2-52-8-240-214.us-west-1.compute.amazonaws.com/api/user/getCurrentUser`, { withCredentials: true })
             .then(function (response) {
                 setUser(response.data.results);
             })
             .catch(function (error) {
                 console.log(error);
             });
-        axios.get(`http://localhost:5003/api/post/getPostHistory`, { withCredentials: true })
+        axios.get(`http://ec2-52-8-240-214.us-west-1.compute.amazonaws.com/api/post/getPostHistory`, { withCredentials: true })
             .then(function (response) {
                 setPost(response.data.results);
             })

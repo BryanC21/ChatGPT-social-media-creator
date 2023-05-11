@@ -6,7 +6,7 @@ import axios from "axios";
 export default function Login() {
 
   useEffect(() => {
-    window.location.replace("http://localhost:5003/login");
+    window.location.replace("http://ec2-52-8-240-214.us-west-1.compute.amazonaws.com/api/login");
   }, []);
 
 
