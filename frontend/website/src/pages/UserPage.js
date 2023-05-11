@@ -26,14 +26,14 @@ const UserPage = () => {
     const [user, setUser] = React.useState({});
 
     React.useEffect(() => {
-        axios.get(`http://localhost:5003/users/${params.userId}`, {
+        axios.get(`http://localhost:5003/api/user/getCurrentUser`, {
             headers: {
                 authorization: `Bearer ${getToken()}`
             }
         })
             .then(function (response) {
                 // console.log(response.data)
-                setUser(response.data);
+                setUser(response.data.results);
             })
             .catch(function (error) {
 
@@ -43,14 +43,14 @@ const UserPage = () => {
 
     const [post, getByPost] = React.useState({});
     React.useEffect(() => {
-        axios.get(`http://localhost:5003/api/users/${params.userId}`, {
+        axios.get(`http://localhost:5003/api/post/getPostHistory`, {
             headers: {
                 authorization: `Bearer ${getToken()}`
             }
         })
             .then(function (response) {
                 // console.log(response.data)
-                getByPost(response.data);
+                getByPost(response.data.results);
             })
             .catch(function (error) {
 
