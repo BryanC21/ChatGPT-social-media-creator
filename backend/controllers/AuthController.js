@@ -59,9 +59,7 @@ exports.authTwitterCallback = async (req, res) => {
 
 exports.checkTwitter = async (req, res) => {
     var user_id = req.user.attributes.email;
-    var platform_id = await Platform.findOne({name: "Twitter"}).then(result => result._id);
-    console.log(await Account.findOne({user_id: user_id}));
-    if (await Account.exists({user_id: user_id, platform_id: platform_id})) {
+    if (await checkTwitterHelper(user_id)) {
         return res.status(200).send({
             status: "success"
         })
@@ -69,5 +67,14 @@ exports.checkTwitter = async (req, res) => {
         return res.status(401).send({
             status: "error",
         })
+    }
+}
+
+exports.checkTwitterHelper = async (user_id) => {
+    var platform_id = await Platform.findOne({name: "Twitter"}).then(result => result._id);
+    if (await Account.exists({user_id: user_id, platform_id: platform_id})) {
+        return true;
+    } else {
+        return false;
     }
 }

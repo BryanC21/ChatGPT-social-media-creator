@@ -8,7 +8,7 @@ const bodyParser = require('body-parser')
 require('./config/passport');
 const path = require('path');
 const dotenv = require('dotenv').config();
-
+const {checkTwitterHelper} = require("./controllers/AuthController");
 
 
 //Start of AWS Parameter Store code
@@ -118,7 +118,11 @@ runner().then(() => {
 
     app.get("/login", passport.authenticate('saml', () => {
         console.log("login");
-        return res.redirect("http://localhost:3000");
+        if (checkTwitterHelper(req.user.attributes.email)) {
+            return res.redirect("http://localhost:3000");
+        } else {
+            authTwitter(req, res);
+        }
     }));
 
     app.get("/safety", (req, res) => {
