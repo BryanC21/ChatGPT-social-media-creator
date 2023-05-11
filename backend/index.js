@@ -64,6 +64,7 @@ runner().then(() => {
     const adminRoute = require("./routes/AdminRoute");
     const authRoute = require("./routes/AuthRoute");
     const postRoute = require("./routes/PostRoute");
+    const userRoute = require("./routes/UserRoute");
 
     const whisper = require("./AI/whisper");
     const useDalle = require("./AI/dall-e");
@@ -101,6 +102,7 @@ runner().then(() => {
     app.use("/api/admin", adminRoute);
     app.use("/api/auth", authRoute);
     app.use("/api/post", postRoute);
+    app.use("/api/user", userRoute);
 
     app.use("/api/aiv2", whisper);
     app.use("/api/aiv2", useDalle);
