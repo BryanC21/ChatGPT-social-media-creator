@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-//import { Box, Container, Grid, Stack, Typography } from "@mui/material";
+import { Box, Container, Grid, Stack, Typography } from "@mui/material";
 import axios from "axios";
 import dayjs from "dayjs";
 import * as React from 'react';
@@ -25,7 +25,7 @@ const UserPage = () => {
     const [user, setUser] = React.useState({});
 
     React.useEffect(() => {
-        axios.get(`${config.BASE_URL}/users/${params.userId}`, {
+        axios.get(`http://localhost:5003/users/${params.userId}`, {
             headers: {
                 authorization: `Bearer ${getToken()}`
             }

@@ -10,6 +10,8 @@ const path = require('path');
 const dotenv = require('dotenv').config();
 
 
+
+//Start of AWS Parameter Store code
 const AWS = require('aws-sdk');
 // Set the AWS region
 AWS.config.update({
@@ -108,18 +110,18 @@ runner().then(() => {
         console.log("logout");
         req.logout(() => {
             req.user = null;
-            res.send("logged out");
+            return res.redirect("http://localhost:3000");
         });
     });
 
     app.get("/login", passport.authenticate('saml', () => {
         console.log("login");
-        return res.redirect("http://localhost:3000/sso");
+        return res.redirect("http://localhost:3000");
     }));
 
     app.get("/safety", (req, res) => {
         console.log("safety");
-        return res.redirect("http://localhost:3000/employees?mode=default");
+        return res.redirect("http://localhost:3000");
     });
     app.post("/login/callback", passport.authenticate('saml', config.saml.options));
 

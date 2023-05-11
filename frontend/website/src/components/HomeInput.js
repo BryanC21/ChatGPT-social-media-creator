@@ -2,12 +2,22 @@ import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 
 function HomeInput(props) {
-
-  const { textInput, audioInput, videoInput, handleAudioInputChange, handleTextInputChange, handleVideoInputChange, generateSummary } = props;
+  const { textInput, handleTextInputChange, handleMediaInputChange, generateSummary, handleTweetInputChange, postTweet } = props;
+  const [fileType, setFileType] = useState('text'); // Default file type is set to 'text'
+  const [tweetInput, setTweetInput] = useState('');
 
   const handleGenerateClick = () => {
     generateSummary(textInput);
-  }
+  };
+
+  const handleFileTypeChange = (event) => {
+    setFileType(event.target.value);
+  };
+
+  const handlePostTweet = () => {
+    postTweet(tweetInput);
+    setTweetInput('');
+  };
 
   return (
     <div>
@@ -19,27 +29,37 @@ function HomeInput(props) {
           </div>
 
           <Form>
-            <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-              <Form.Label>Text input:</Form.Label>
-              <Form.Control as="textarea" rows={3} value={textInput} onChange={handleTextInputChange} />
+            <Form.Group className="mb-3" controlId="file-type-select">
+              <Form.Label>Select File Type:</Form.Label>
+              <Form.Select value={fileType} onChange={handleFileTypeChange}>
+                <option value="text">Text</option>
+                <option value="audioVideo">Audio/Video</option>
+              </Form.Select>
             </Form.Group>
-            <Form.Group className="mb-3" controlId="password">
-              <label htmlFor="audio-input">Audio Input:</label> &nbsp;&nbsp;&nbsp;
-              <input type="file" id="audio-input" accept="audio/*" value={audioInput} onChange={handleAudioInputChange} />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="password">
-              <label htmlFor="video-input">Video Input:</label>&nbsp;&nbsp;&nbsp;
-              <input type="file" id="video-input" accept="video/*" value={videoInput} onChange={handleVideoInputChange} />
-            </Form.Group>
-          </Form>
-          <div className='text-center'><Button onClick={handleGenerateClick}>Generate</Button></div>
 
+            <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+              <Form.Label>{fileType === 'text' ? 'Text' : 'Audio/Video'} input:</Form.Label>
+              {fileType === 'text' ? (
+                <Form.Control as="textarea" rows={3} value={textInput} onChange={handleTextInputChange} />
+              ) : (
+                <input type="file" id="media-input" accept="audio/*,video/*" multiple onChange={handleMediaInputChange} />
+              )}
+            </Form.Group>
+
+            <Button onClick={handleGenerateClick}>Generate</Button>
+
+            <Form.Group className="mt-3" controlId="exampleForm.ControlTextarea2">
+              <Form.Label>Generated Tweet:</Form.Label>
+              <Form.Control as="textarea" rows={3} value={tweetInput} onChange={handleTweetInputChange} />
+            </Form.Group>
+
+            <Button variant="primary" onClick={handlePostTweet}>Post Tweet</Button>
+          </Form>
         </div>
       </div>
-
-
     </div>
   );
 }
 
 export default HomeInput;
+
