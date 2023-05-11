@@ -6,7 +6,7 @@ const { response } = require("express");
 
 exports.getByID = (req, res) => {
     const user = request.body.user_id;
-    const userProfile = await (Account.findById(user));
+    const userProfile = await (User.findById(user));
     response.status(http.StatusCode.OK).json(userProfile);
 }
 
