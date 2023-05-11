@@ -30,7 +30,7 @@ exports.postTwitter = async (req, res) => {
         accessSecret: account.secret,
     });
     var media = {}
-    if (img and img != "") {
+    if (img && img != "") {
         const img_name = await downloadImage(img, "../../img/");
         const mediaId = await client.v1.uploadMedia(img_name["filename"]);
         media = {media: { media_ids: [mediaId] }}
