@@ -34,18 +34,12 @@ function MyNavbar() {
           </Nav>
           {!isLoggedIn ?
             <Nav>
-              <Nav.Link>
-                <Link to="/login"> Log In </Link>
-              </Nav.Link>
-              <Nav.Link>
-                <Link to="/signup"> Sign In </Link>
-              </Nav.Link>
+                <Nav.Link to="/login"> Log In </Nav.Link>
+                <Nav.Link to="/signup"> Sign In </Nav.Link>
             </Nav>
             :
             <Nav>
-              <Nav.Link>
-                <Link to="/logout"> Log Out </Link>
-              </Nav.Link>
+                <Nav.Link to="/logout"> Log Out </Nav.Link>
             </Nav>}
         </Navbar.Collapse>
       </Container>
