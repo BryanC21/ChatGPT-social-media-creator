@@ -6,11 +6,11 @@ const passport = require('passport');
 const session = require('express-session');
 const bodyParser = require('body-parser')
 require('./config/passport');
-//const path = require('path');
-//const dotenv = require('dotenv').config();
+const path = require('path');
+const dotenv = require('dotenv').config();
 
 
-// Start of AWS Parameter Store code
+Start of AWS Parameter Store code
 const AWS = require('aws-sdk');
 // Set the AWS region
 AWS.config.update({
@@ -60,6 +60,7 @@ async function runner() {
 runner().then(() => {
 
     // import routes
+    const adminRoute = require("./routes/AdminRoute");
     const authRoute = require("./routes/AuthRoute");
     const postRoute = require("./routes/PostRoute");
 
@@ -97,6 +98,7 @@ runner().then(() => {
     });
 
     // routes
+    app.use("/api/admin", adminRoute);
     app.use("/api/auth", authRoute);
     app.use("/api/post", postRoute);
 

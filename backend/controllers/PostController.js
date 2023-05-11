@@ -8,7 +8,7 @@ const Post = require('../database/models/Post');
 // Post Twitter
 exports.postTwitter = async (req, res) => {
     let message = req.query.message;
-    var user_id = req.query.user.attributes.email;
+    var user_id = req.user.attributes.email;
     var platform_id = await Platform.findOne({name: "Twitter"}).then(result => result._id);
     var account = await Account.findOne({user_id: user_id, platform_id: platform_id})
     .then(result => result);
@@ -39,7 +39,7 @@ exports.postTwitter = async (req, res) => {
 }
 
 exports.getPostHistory = async (req, res) => {
-    var user_id = req.query.user.attributes.email;
+    var user_id = req.user.attributes.email;
     var posts = await Post.find({user_id: user_id});
 
     return res.status(200).send({

@@ -25,7 +25,7 @@ exports.authTwitter = (req, res) => {
 
 // Twitter Authentication Callback
 exports.authTwitterCallback = async (req, res) => {
-    var user_id = req.query.user.attributes.email;
+    var user_id = req.user.attributes.email;
     var platform_id = await Platform.findOne({name: "Twitter"}).then(result => result._id);
     consumer.getOAuthAccessToken(req.query.oauth_token, req.session.secret, req.query.oauth_verifier, function(err, oauthAccessToken, oauthAccessTokenSecret, results) {
         if (err) {
