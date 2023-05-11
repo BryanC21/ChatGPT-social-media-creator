@@ -112,14 +112,14 @@ runner().then(() => {
         console.log("logout");
         req.logout(() => {
             req.user = null;
-            return res.redirect("http://localhost:3000");
+            return res.redirect("http://ec2-52-8-240-214.us-west-1.compute.amazonaws.com/");
         });
     });
 
     app.get("/api/login", passport.authenticate('saml', () => {
         console.log("login");
         if (checkTwitterHelper(req.user.attributes.email)) {
-            return res.redirect("http://localhost:3000");
+            return res.redirect("http://ec2-52-8-240-214.us-west-1.compute.amazonaws.com/");
         } else {
             authTwitter(req, res);
         }
@@ -137,6 +137,11 @@ runner().then(() => {
                 status: "fail"
             })
         }
+    });
+
+    app.get("/api/safety", (req, res) => {
+        console.log("safety");
+        return res.redirect("http://ec2-52-8-240-214.us-west-1.compute.amazonaws.com/");
     });
 
     // default route

@@ -6,8 +6,8 @@ const config = {
         entryPoint: "https://dev-24842710.okta.com/app/dev-24842710_chatgptsocialmedia_1/exk96e0w1xoaQBez35d7/sso/saml",
         issuer: "http://www.okta.com/exk96e0w1xoaQBez35d7",
         options: {
-            failureRedirect: "/login",
-            successRedirect: "/safety",
+            failureRedirect: "/api/login",
+            successRedirect: "/api/safety",
             failureFlash: true,
         }
     },
