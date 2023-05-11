@@ -6,7 +6,7 @@ phases:
       nodejs: 12
     commands:
       # Install dependencies needed for running tests
-      - npm install
+      #- npm install
       # Upgrade AWS CLI to the latest version
       - pip3 install --upgrade awscli
   pre_build:
@@ -16,10 +16,10 @@ phases:
   post_build:
     commands:
       # Remove existing node_modules to clear dev dependencies
-      - rm -r node_modules
+      #- rm -r node_modules
 
       # Change Node Versions
-      - yum remove -y nodejs
+      - yum remove -y nodejs npm
       - curl -sL https://rpm.nodesource.com/setup_16.x | bash -
       - yum install -y nodejs
 
@@ -39,3 +39,4 @@ artifacts:
   files:
     - template-export.yml
     - template-configuration.json
+    - '**/*'
