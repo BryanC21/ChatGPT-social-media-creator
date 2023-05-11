@@ -116,7 +116,7 @@ runner().then(() => {
 
     app.get("/login", passport.authenticate('saml', () => {
         console.log("login");
-        return res.redirect("http://localhost:3000/sso");
+        return res.redirect("http://localhost:3000");
     }));
 
     app.get("/safety", (req, res) => {
