@@ -29,9 +29,13 @@ exports.postTwitter = async (req, res) => {
         accessToken: account.token,
         accessSecret: account.secret,
     });
-    const img_name = await downloadImage(img, "../../img/");
-    const mediaId = await client.v1.uploadMedia(img_name["filename"]);
-    client.v2.tweet(message, {media: { media_ids: [mediaId] }}).then((val) => {
+    var media = {}
+    if (img and img != "") {
+        const img_name = await downloadImage(img, "../../img/");
+        const mediaId = await client.v1.uploadMedia(img_name["filename"]);
+        media = {media: { media_ids: [mediaId] }}
+    }
+    client.v2.tweet(message, media).then((val) => {
         let post = new Post({
             user_id: user_id,
             text: message,
