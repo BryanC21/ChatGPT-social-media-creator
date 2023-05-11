@@ -70,11 +70,10 @@ exports.checkTwitter = async (req, res) => {
     }
 }
 
-exports.checkTwitterHelper = async (user_id) => {
+checkTwitterHelper = async (user_id) => {
     var platform_id = await Platform.findOne({name: "Twitter"}).then(result => result._id);
-    if (await Account.exists({user_id: user_id, platform_id: platform_id})) {
-        return true;
-    } else {
-        return false;
-    }
+    let result = await Account.exists({user_id: user_id, platform_id: platform_id});
+    console.log(result);
+    return result;
 }
+exports.checkTwitterHelper = checkTwitterHelper;

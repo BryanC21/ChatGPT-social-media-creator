@@ -116,14 +116,7 @@ runner().then(() => {
         });
     });
 
-    app.get("/api/login", passport.authenticate('saml', () => {
-        console.log("login");
-        if (checkTwitterHelper(req.user.attributes.email)) {
-            return res.redirect("http://ec2-52-8-240-214.us-west-1.compute.amazonaws.com/");
-        } else {
-            authTwitter(req, res);
-        }
-    }));
+    app.get("/api/login", passport.authenticate('saml', () => {}));
 
     app.post("/api/login/callback", passport.authenticate('saml', config.saml.options));
 
@@ -139,9 +132,14 @@ runner().then(() => {
         }
     });
 
-    app.get("/api/safety", (req, res) => {
+    app.get("/api/safety", async (req, res) => {
         console.log("safety");
-        return res.redirect("http://ec2-52-8-240-214.us-west-1.compute.amazonaws.com/");
+        let result = await checkTwitterHelper(req.user.attributes.email);
+        if (result) {
+            return res.redirect("http://ec2-52-8-240-214.us-west-1.compute.amazonaws.com/");
+        } else {
+            return res.redirect("/api/auth/twitter");
+        }
     });
 
     // default route
