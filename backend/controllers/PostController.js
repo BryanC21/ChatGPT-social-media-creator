@@ -4,10 +4,20 @@ const User = require('../database/models/User');
 const Account = require('../database/models/Account');
 const Platform = require('../database/models/Platform');
 const Post = require('../database/models/Post');
+const download = require('image-downloader');
+
+async function downloadImage(url, filepath) {
+    return await download.image({
+       url,
+       dest: filepath 
+    })
+    .catch((err) => console.error(err));
+}
 
 // Post Twitter
 exports.postTwitter = async (req, res) => {
     let message = req.query.message;
+    var img = req.query.img;
     var user_id = req.user.attributes.email;
     var platform_id = await Platform.findOne({name: "Twitter"}).then(result => result._id);
     var account = await Account.findOne({user_id: user_id, platform_id: platform_id})
@@ -19,11 +29,13 @@ exports.postTwitter = async (req, res) => {
         accessToken: account.token,
         accessSecret: account.secret,
     });
-    client.v2.tweet(message).then((val) => {
+    const img_name = await downloadImage(img, "../../img/");
+    const mediaId = await client.v1.uploadMedia(img_name["filename"]);
+    client.v2.tweet(message, {media: { media_ids: [mediaId] }}).then((val) => {
         let post = new Post({
             user_id: user_id,
             text: message,
-            image: "",
+            image: img,
         })
         post.save().then(() => console.log("Platform Saved"));
         return res.status(200).send({

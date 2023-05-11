@@ -21,6 +21,7 @@
     "fast-levenshtein": "^3.0.0",
     "form-data": "^4.0.0",
     "fs": "^0.0.1-security",
+    "image-downloader": "^4.3.0",
     "mongoose": "^7.0.3",
     "multer": "^1.4.5-lts.1",
     "mysql": "^2.18.1",
