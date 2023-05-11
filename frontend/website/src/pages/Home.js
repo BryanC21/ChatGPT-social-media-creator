@@ -47,7 +47,7 @@ export default function Home() {
     //setIsLoading(true);
     let response = text;
     // Call backend and generate tweet here
-    axios.get("http://ec2-52-8-240-214.us-west-1.compute.amazonaws.com//api/ai/summarize", { params: { text: text } })
+    axios.get("http://ec2-52-8-240-214.us-west-1.compute.amazonaws.com/api/ai/summarize", { params: { text: text } })
       .then(res => {
         response = res.data.results;
         axios.get("http://ec2-52-8-240-214.us-west-1.compute.amazonaws.com/api/ai/createTweet", { params: { text: response } })
