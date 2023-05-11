@@ -30,30 +30,31 @@ async function getParameter(parameterName) {
     return response.Parameter.Value;
 }
 async function runner() {
-    // Write the environment variable to a new .env file
-    //const envFilePath = path.join(__dirname, '.env');
-    // Clear the file if it already exists
-    //fs.writeFileSync(envFilePath, '');
-    // Hard write the environment variable to a new .env file
-    const myVar = await getParameter('MONGODB_URI');
 
-    //fs.appendFileSync(envFilePath, `MONGODB_URI=${myVar}\n`);
-    process.env.MONGODB_URI = myVar;
 
-    const myVar2 = await getParameter('TWITTER_CLIENT_ID');
-    //fs.appendFileSync(envFilePath, `TWITTER_CLIENT_ID=${myVar2}\n`);
-    process.env.TWITTER_CLIENT_ID = myVar2;
+        // THIS GRABS THE ENVIRONMENT VARIABLES FROM AWS PARAMETER STORE
+        // Comment out because it would cause problems with the local environment
+        // keep using your env file for local development
 
-    const myVar3 = await getParameter('TWITTER_CLIENT_SECRET');
-    //fs.appendFileSync(envFilePath, `TWITTER_CLIENT_SECRET=${myVar3}\n`);
-    process.env.TWITTER_CLIENT_SECRET = myVar3;
+        const myVar = await getParameter('MONGODB_URI');
+        process.env.MONGODB_URI = myVar;
 
-    
-    console.log("__________")
-    console.log(process.env.MONGODB_URI);
-    console.log(myVar2);
-    console.log(myVar3);
-    
+        const myVar2 = await getParameter('TWITTER_CLIENT_ID');
+        process.env.TWITTER_CLIENT_ID = myVar2;
+
+        const myVar3 = await getParameter('TWITTER_CLIENT_SECRET');
+        process.env.TWITTER_CLIENT_SECRET = myVar3;
+
+        const myVar4 = await getParameter('OPENAI_API_KEY');
+        process.env.OPENAI_API_KEY = myVar4;
+
+
+        console.log("__________")
+        console.log(process.env.MONGODB_URI);
+        console.log(process.env.TWITTER_CLIENT_ID);
+        console.log(process.env.TWITTER_CLIENT_SECRET);
+        console.log(process.env.OPENAI_API_KEY);
+
 }
 
 runner().then(() => {
@@ -62,6 +63,8 @@ runner().then(() => {
     const adminRoute = require("./routes/AdminRoute");
     const authRoute = require("./routes/AuthRoute");
     const postRoute = require("./routes/PostRoute");
+
+    const whisper = require("./AI/whisper");
     const aiRoute = require("./routes/AiRoute");
 
 
@@ -98,7 +101,10 @@ runner().then(() => {
     app.use("/api/admin", adminRoute);
     app.use("/api/auth", authRoute);
     app.use("/api/post", postRoute);
+
+    app.use("/api/aiv2", whisper);
     app.use("/api/ai", aiRoute);
+
 
     // SSO
     app.get("/logout", (req, res) => {
