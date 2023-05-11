@@ -37,7 +37,7 @@ function MyNavbar() {
               <Link to="/login"> Log In </Link>
             </Nav>
             <Nav className='me-auto'>
-              <Link to="/signup"> Sign In </Link>
+              <Link to="/signup"> Sign Up </Link>
             </Nav>
           </div>
           :
