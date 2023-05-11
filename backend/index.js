@@ -10,7 +10,6 @@ const path = require('path');
 const dotenv = require('dotenv').config();
 
 
-Start of AWS Parameter Store code
 const AWS = require('aws-sdk');
 // Set the AWS region
 AWS.config.update({
