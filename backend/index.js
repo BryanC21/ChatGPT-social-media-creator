@@ -66,6 +66,7 @@ runner().then(() => {
     const postRoute = require("./routes/PostRoute");
 
     const whisper = require("./AI/whisper");
+    const useDalle = require("./AI/dall-e");
     const aiRoute = require("./routes/AiRoute");
 
 
@@ -102,6 +103,7 @@ runner().then(() => {
     app.use("/api/post", postRoute);
 
     app.use("/api/aiv2", whisper);
+    app.use("/api/aiv2", useDalle);
     app.use("/api/ai", aiRoute);
 
 
