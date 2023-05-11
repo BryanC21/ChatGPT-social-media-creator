@@ -5,20 +5,9 @@ import axios from "axios";
 
 export default function Login() {
 
-  const history = useNavigate();
-
   useEffect(() => {
-    // some check somehow
-    axios.get("http://localhost:5003/login")
-      .then((res) => {
-        console.log(res);
-        history("/");
-      }
-      ).catch((err) => {
-        console.log(err);
-      }
-      )
-  }, [history]);
+    window.location.replace("http://localhost:5003/login");
+  }, []);
 
 
 

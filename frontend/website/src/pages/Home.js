@@ -23,8 +23,7 @@ export default function Home() {
   const generateSummary = async (text, audioFile, videoFile) => {
     // Your API Call here
     // const response = await axios.post('URL');
-    const response = text;
-
+    let response = text;
     setSummary(response);
   }
 
@@ -33,12 +32,13 @@ export default function Home() {
   return <div>
     <div className="container">
       <div>
-        <div className="d-flex justify-content-around">
+        <div className=" justify-content-around">
           <HomeInput textInput={textInput} audioInput={audioInput} videoInput={videoInput}
             handleAudioInputChange={handleAudioInputChange}
             handleTextInputChange={handleTextInputChange}
             handleVideoInputChange={handleVideoInputChange}
-            generateSummary={setSummary} />
+            generateSummary={generateSummary} />
+            <br/>
           <Summary summary={summary} />
         </div>
       </div>

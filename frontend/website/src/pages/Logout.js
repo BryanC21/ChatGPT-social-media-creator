@@ -6,23 +6,11 @@ import axios from "axios";
 
 export default function Logout() {
 
-    //TODO code to log out
-    //TODO redirect to wherever
-
-    const history = useNavigate();
-
     useEffect(() => {
       // some check somehow
-      axios.get("http://localhost:5003/logout")
-        .then((res) => {
-          console.log(res);
-          history("/");
-        }
-        ).catch((err) => {
-          console.log(err);
-        }
-        )
-    }, [history]);
+      window.location.replace("http://localhost:5003/logout");
+
+    }, []);
 
     return (
 

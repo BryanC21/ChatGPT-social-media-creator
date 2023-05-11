@@ -109,7 +109,7 @@ runner().then(() => {
         console.log("logout");
         req.logout(() => {
             req.user = null;
-            res.send("logged out");
+            return res.redirect("http://localhost:3000");
         });
     });
 
@@ -120,7 +120,7 @@ runner().then(() => {
 
     app.get("/safety", (req, res) => {
         console.log("safety");
-        return res.redirect("http://localhost:3000/employees?mode=default");
+        return res.redirect("http://localhost:3000");
     });
     app.post("/login/callback", passport.authenticate('saml', config.saml.options));
 
