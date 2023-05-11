@@ -8,7 +8,7 @@ const bodyParser = require('body-parser')
 require('./config/passport');
 const path = require('path');
 const dotenv = require('dotenv').config();
-
+const {checkTwitterHelper} = require("./controllers/AuthController");
 
 
 //Start of AWS Parameter Store code
@@ -64,6 +64,7 @@ runner().then(() => {
     const adminRoute = require("./routes/AdminRoute");
     const authRoute = require("./routes/AuthRoute");
     const postRoute = require("./routes/PostRoute");
+    const userRoute = require("./routes/UserRoute");
 
     const whisper = require("./AI/whisper");
     const useDalle = require("./AI/dall-e");
@@ -101,6 +102,7 @@ runner().then(() => {
     app.use("/api/admin", adminRoute);
     app.use("/api/auth", authRoute);
     app.use("/api/post", postRoute);
+    app.use("/api/user", userRoute);
 
     app.use("/api/aiv2", whisper);
     app.use("/api/aiv2", useDalle);
@@ -118,7 +120,11 @@ runner().then(() => {
 
     app.get("/login", passport.authenticate('saml', () => {
         console.log("login");
-        return res.redirect("http://localhost:3000");
+        if (checkTwitterHelper(req.user.attributes.email)) {
+            return res.redirect("http://localhost:3000");
+        } else {
+            authTwitter(req, res);
+        }
     }));
 
     app.get("/safety", (req, res) => {

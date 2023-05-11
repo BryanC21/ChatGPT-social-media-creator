@@ -56,3 +56,25 @@ exports.authTwitterCallback = async (req, res) => {
         }
     });
 }
+
+exports.checkTwitter = async (req, res) => {
+    var user_id = req.user.attributes.email;
+    if (await checkTwitterHelper(user_id)) {
+        return res.status(200).send({
+            status: "success"
+        })
+    } else {
+        return res.status(401).send({
+            status: "error",
+        })
+    }
+}
+
+exports.checkTwitterHelper = async (user_id) => {
+    var platform_id = await Platform.findOne({name: "Twitter"}).then(result => result._id);
+    if (await Account.exists({user_id: user_id, platform_id: platform_id})) {
+        return true;
+    } else {
+        return false;
+    }
+}

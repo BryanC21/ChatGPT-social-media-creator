@@ -10,6 +10,7 @@ import { getToken } from '../util';
 import Post from "../../../../backend/database/models/Post";
 import Platform from "../../../../backend/database/models/Platform";
 import User from "../../../../backend/database/models/User";
+import { getByPost } from "../../../../backend/controllers/UserController";
 
 const Image = styled('img')({
     height: '100%',
@@ -25,14 +26,31 @@ const UserPage = () => {
     const [user, setUser] = React.useState({});
 
     React.useEffect(() => {
-        axios.get(`http://localhost:5003/users/${params.userId}`, {
+        axios.get(`http://localhost:5003/api/user/getCurrentUser`, {
             headers: {
                 authorization: `Bearer ${getToken()}`
             }
         })
             .then(function (response) {
                 // console.log(response.data)
-                setUser(response.data);
+                setUser(response.data.results);
+            })
+            .catch(function (error) {
+
+                console.log(error);
+            });
+    }, []);
+
+    const [post, getByPost] = React.useState({});
+    React.useEffect(() => {
+        axios.get(`http://localhost:5003/api/post/getPostHistory`, {
+            headers: {
+                authorization: `Bearer ${getToken()}`
+            }
+        })
+            .then(function (response) {
+                // console.log(response.data)
+                getByPost(response.data.results);
             })
             .catch(function (error) {
 
@@ -63,7 +81,7 @@ const UserPage = () => {
                                 {user.email}
                             </Typography>
                             <Typography variant="subtitle2" >
-                                Images Created: {Post.image}
+                                Images Created: {post.image}
                             </Typography>
                         </Grid>
                     </Grid>
