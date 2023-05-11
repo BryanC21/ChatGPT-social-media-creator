@@ -1,6 +1,8 @@
 const db = require("../db_connection");
 const User = require("../database/models/User");
 const Account = require("../database/models/Account");
+const Post = require("../database/models/Post");
+const { response } = require("express");
 
 exports.getByID = (req, res) => {
     const user = request.body.user_id;
@@ -13,6 +15,12 @@ exports.getCurrentUser = (req, res) => {
         status: "success",
         results: req.user.attributes
     })
+}
+
+exports.getByPost = (req, res) => {
+    const user = request.body.user_id;
+    const getpost = await (Post.findById(user));
+    response.status(http.StatusCode.OK).json(getpost);
 }
 
 exports.editByID = (req, res) => {
