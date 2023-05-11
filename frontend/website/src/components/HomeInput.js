@@ -48,7 +48,7 @@ function HomeInput(props) {
   };
 
   const handlePostTweet = () => {
-    postTweet(tweetText);
+    postTweet(tweetText, imgURL);
   };
 
   const handleFileChange = (event) => {
@@ -112,19 +112,21 @@ function HomeInput(props) {
               <br></br>
               <Button variant="primary" onClick={handleImages}>Make Image for tweet</Button>
               <br></br>
+              <br></br>
               { !invisToggle ?
               <div>
-              {/*<label>
+              <label>
                 <input type="checkbox"
                   checked={isChecked}
                   onChange={handleCheckboxChange}/>
                 <span> Include Image for tweet</span>
-              </label>*/}
+              </label>
+              <br></br>
               <img src={imgURL} width='512' height='512'/>
               </div>
               : null}
               <br></br>
-              {/*<Button variant="primary" onClick={handlePostTweet}>Post Tweet</Button>*/}
+              <Button variant="primary" onClick={handlePostTweet}>Post Tweet</Button>
             </Form>
             : <div className="text-center">
               <h1>Loading...</h1>
