@@ -18,16 +18,16 @@ async function downloadImage(url, filepath) {
 exports.postTwitter = async (req, res) => {
     let message = req.query.message;
     var img = req.query.img;
-    var user_id = req.user.attributes.email;
-    var platform_id = await Platform.findOne({name: "Twitter"}).then(result => result._id);
-    var account = await Account.findOne({user_id: user_id, platform_id: platform_id})
-    .then(result => result);
+    // var user_id = req.user.attributes.email;
+    // var platform_id = await Platform.findOne({name: "Twitter"}).then(result => result._id);
+    // var account = await Account.findOne({user_id: user_id, platform_id: platform_id})
+    // .then(result => result);
 
     client = new TwitterApi({
         appKey: process.env.TWITTER_CLIENT_ID,
         appSecret: process.env.TWITTER_CLIENT_SECRET,
-        accessToken: account.token,
-        accessSecret: account.secret,
+        accessToken: req.session.token,
+        accessSecret: req.session.secret,
     });
     var media = {}
     if (img && img != "") {
@@ -36,12 +36,12 @@ exports.postTwitter = async (req, res) => {
         media = {media: { media_ids: [mediaId] }}
     }
     client.v2.tweet(message, media).then((val) => {
-        let post = new Post({
-            user_id: user_id,
-            text: message,
-            image: img,
-        })
-        post.save().then(() => console.log("Platform Saved"));
+        // let post = new Post({
+        //     user_id: user_id,
+        //     text: message,
+        //     image: img,
+        // })
+        // post.save().then(() => console.log("Platform Saved"));
         return res.status(200).send({
             status: "success",
             'message': 'Tweet created successfully'

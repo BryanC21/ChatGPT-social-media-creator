@@ -112,7 +112,7 @@ runner().then(() => {
         console.log("logout");
         req.logout(() => {
             req.user = null;
-            return res.redirect("http://ec2-52-8-240-214.us-west-1.compute.amazonaws.com/");
+            return res.redirect("http://ec2-52-8-240-214.us-west-1.compute.amazonaws.com");
         });
     });
 
@@ -134,12 +134,8 @@ runner().then(() => {
 
     app.get("/api/safety", async (req, res) => {
         console.log("safety");
-        let result = await checkTwitterHelper(req.user.attributes.email);
-        if (result) {
-            return res.redirect("http://ec2-52-8-240-214.us-west-1.compute.amazonaws.com/");
-        } else {
-            return res.redirect("/api/auth/twitter");
-        }
+        res.redirect("http://ec2-52-8-240-214.us-west-1.compute.amazonaws.com");
+        // let result = await checkTwitterHelper(req.user.attributes.email);
     });
 
     // default route
