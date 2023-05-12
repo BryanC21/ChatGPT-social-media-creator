@@ -41,9 +41,15 @@ function MyNavbar() {
             </Nav>
           </div>
           :
-          <Nav className='me-auto'>
-            <Link to="/logout"> Log Out </Link>
-          </Nav>}
+          <div>
+            <Nav className='me-auto'>
+              <Link to="/user"> User </Link>
+            </Nav>
+            <Nav className='me-auto'>
+              <Link to="/logout"> Log Out </Link>
+            </Nav>
+          </div>}
+
       </Container>
     </Navbar>
   );

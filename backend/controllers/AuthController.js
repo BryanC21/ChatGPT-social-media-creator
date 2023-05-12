@@ -74,13 +74,7 @@ exports.checkTwitter = async (req, res) => {
 }
 
 checkTwitterHelper = async (user_id) => {
-<<<<<<< HEAD
-    var platform_id = await Platform.findOne({name: "Twitter"})
-    .then(result => result._id)
-    .catch(err => console.log(err));;
-=======
     var platform_id = await Platform.findOne({name: "Twitter"}).then(result => result._id).catch((err) => console.error(err));
->>>>>>> 85d173ba4f5b60b0c6e6f3a7f5a4a679a602bdf7
     let result = await Account.exists({user_id: user_id, platform_id: platform_id});
     return result;
 }

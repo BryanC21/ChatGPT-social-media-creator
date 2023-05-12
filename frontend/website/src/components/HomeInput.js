@@ -47,6 +47,10 @@ function HomeInput(props) {
     //setTweetText(event.target.value);
   };
 
+  const handlerTwitterLogin = async () => {
+    window.location.replace("http://ec2-52-8-240-214.us-west-1.compute.amazonaws.com/api/auth/twitter");
+  }
+
   const handlePostTweet = () => {
     if (!isChecked) {
       postTweet(tweetText, '');
@@ -129,6 +133,8 @@ function HomeInput(props) {
                   <img src={imgURL} width='512' height='512' />
                 </div>
                 : null}
+                <br></br>
+                <Button variant="secondary" onClick={handlerTwitterLogin}>Link Twitter</Button>
               <br></br>
               <Button variant="primary" onClick={handlePostTweet}>Post Tweet</Button>
             </Form>
