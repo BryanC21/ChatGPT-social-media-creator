@@ -26,9 +26,6 @@ exports.authTwitter = (req, res) => {
 // Twitter Authentication Callback
 exports.authTwitterCallback = async (req, res) => {
     // var user_id = req.user.attributes.email;
-    var platform_id = await Platform.findOne({name: "Twitter"})
-    .then(result => result._id)
-    .catch(err => console.log(err));
     consumer.getOAuthAccessToken(req.query.oauth_token, req.session.secret, req.query.oauth_verifier, function(err, oauthAccessToken, oauthAccessTokenSecret, results) {
         if (err) {
             return res.status(401).send({
@@ -77,9 +74,13 @@ exports.checkTwitter = async (req, res) => {
 }
 
 checkTwitterHelper = async (user_id) => {
+<<<<<<< HEAD
     var platform_id = await Platform.findOne({name: "Twitter"})
     .then(result => result._id)
     .catch(err => console.log(err));;
+=======
+    var platform_id = await Platform.findOne({name: "Twitter"}).then(result => result._id).catch((err) => console.error(err));
+>>>>>>> 85d173ba4f5b60b0c6e6f3a7f5a4a679a602bdf7
     let result = await Account.exists({user_id: user_id, platform_id: platform_id});
     return result;
 }

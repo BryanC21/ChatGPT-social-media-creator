@@ -48,7 +48,11 @@ function HomeInput(props) {
   };
 
   const handlePostTweet = () => {
-    postTweet(tweetText, imgURL);
+    if (!isChecked) {
+      postTweet(tweetText, '');
+    } else {
+      postTweet(tweetText, imgURL);
+    }
   };
 
   const handleFileChange = (event) => {
@@ -113,18 +117,18 @@ function HomeInput(props) {
               <Button variant="primary" onClick={handleImages}>Make Image for tweet</Button>
               <br></br>
               <br></br>
-              { !invisToggle ?
-              <div>
-              <label>
-                <input type="checkbox"
-                  checked={isChecked}
-                  onChange={handleCheckboxChange}/>
-                <span> Include Image for tweet</span>
-              </label>
-              <br></br>
-              <img src={imgURL} width='512' height='512'/>
-              </div>
-              : null}
+              {!invisToggle ?
+                <div>
+                  <label>
+                    <input type="checkbox"
+                      checked={isChecked}
+                      onChange={handleCheckboxChange} />
+                    <span> Include Image for tweet</span>
+                  </label>
+                  <br></br>
+                  <img src={imgURL} width='512' height='512' />
+                </div>
+                : null}
               <br></br>
               <Button variant="primary" onClick={handlePostTweet}>Post Tweet</Button>
             </Form>
