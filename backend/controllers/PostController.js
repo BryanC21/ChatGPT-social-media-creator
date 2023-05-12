@@ -19,9 +19,10 @@ exports.postTwitter = async (req, res) => {
     let message = req.query.message;
     var img = req.query.img;
     var user_id = req.user.attributes.email;
-    var platform_id = await Platform.findOne({name: "Twitter"}).then(result => result._id);
+    var platform_id = await Platform.findOne({name: "Twitter"}).then(result => result._id).catch((err) => console.error(err));
     var account = await Account.findOne({user_id: user_id, platform_id: platform_id})
-    .then(result => result);
+    .then(result => result)
+    .catch((err) => console.error(err));
 
     client = new TwitterApi({
         appKey: process.env.TWITTER_CLIENT_ID,
